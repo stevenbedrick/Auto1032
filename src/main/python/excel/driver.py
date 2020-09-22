@@ -46,7 +46,8 @@ def run_complete_process(
     if progress_callback:
         progress_callback(1, total_stages)
     # Step 1: Generate the blank 1032, writing to a temp path
-    _, scratch_file_path = mkstemp()
+    scratch_fd, scratch_file_path = mkstemp()
+    os.close(scratch_fd)
 
 
     generate_1032(template_path=template_path,
