@@ -13,7 +13,7 @@ def show_in_finder(path: str):
     # I wonder if this will work?
     if sys.platform == 'win32':
         args_to_send = [
-            "/select",
+            "/select,",
             QDir.toNativeSeparators(path)
         ]
         QProcess.startDetached("explorer", args_to_send)
