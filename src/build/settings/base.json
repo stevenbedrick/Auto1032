@@ -1,0 +1,6 @@
+{
+    "app_name": "Auto1032",
+    "author": "Steven Bedrick",
+    "main_module": "src/main/python/main.py",
+    "version": "0.0.0"
+}
