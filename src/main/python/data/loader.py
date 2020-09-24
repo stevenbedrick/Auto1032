@@ -76,7 +76,7 @@ def load_values_from_inventory_file(
     stop_row = None
 
     for idx, r in enumerate(inventory_sheet.iter_rows(min_row=2)):  # skip the header row
-        batch_num = r[BATCH_NUMBER_COLUMN_OFFSET].value
+        batch_num = str(r[BATCH_NUMBER_COLUMN_OFFSET].value)
         if batch_num == target_batch:
             if start_row is None:  # we must have found the first occurrence
                 start_row = idx + 2  # add one for the header, and one more to get us into 1-indexed territory
