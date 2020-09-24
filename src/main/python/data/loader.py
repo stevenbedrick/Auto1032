@@ -21,7 +21,7 @@ def load_sheet_names(path_to_spreadsheet: str) -> List[str]:
     return wb.sheetnames
 
 
-def load_batch_numbers_from_dr568(path_to_spreadsheet: str, from_sheet: str) -> Set[int]:
+def load_batch_numbers_from_dr568(path_to_spreadsheet: str, from_sheet: str) -> Set[str]:
     """
     Rolls through a DR568 spreadsheet, returns unique batch numbers found
     :param path_to_spreadsheet:
