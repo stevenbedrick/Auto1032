@@ -12,6 +12,8 @@ This is a somewhat brittle program, and makes certain assumptions, mostly about 
 - Proxy number is in column `D`
 - Cards per sheet: 5
 
+Beyond that, the other major assumption is about the template file- it basically needs to be run on a very specific template file, otherwise the output behavior is undefined. `¯\_(ツ)_/¯`
+
 Also, Be Ye Warned that there's not a lot in terms of helpful error messages at the moment.
 
 This program also seems to struggle with very large input inventory files, possibly due to limitations in the [openpyxl](https://openpyxl.readthedocs.io/en/stable/) library that I am using to parse Excel workbooks. 
@@ -28,6 +30,8 @@ This program also seems to struggle with very large input inventory files, possi
     - _Note_: This has been tested on Mac OS X and Windows 10; note that on Windows 10 I encountered [some issues](https://github.com/mherrmann/fbs/issues/147#issuecomment-698164639) creating an installer executable.
 
 ## Future Features
+
+This was just meant as a quick weekend project, but if anybody ends up ever wanting to use it more, these might be useful features:
 
 - Solving performance issues with large input files
 - A more efficient UI for processing multiple batch numbers in one go
