@@ -47,7 +47,7 @@ CardBatch = List[Tuple[int, int]]
 def load_values_from_dr568(
         path_to_spreadsheet: str,
         from_sheet: str,
-        target_batch: int,
+        target_batch: str,
         cards_per_sheet: int = CARDS_PER_WORKSHEET
 ) -> List[CardBatch]:
     """
