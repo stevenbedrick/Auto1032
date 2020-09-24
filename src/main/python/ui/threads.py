@@ -76,19 +76,22 @@ class Generate1032Thread(QThread):
         def cb(step_n, total_n):
             self.status.emit((step_n, total_n))
 
-        run_complete_process(
-            data_input_path=self.data_input_path,
-            data_input_sheet=self.data_input_sheet,
-            batch_number=self.batch_number,
-            template_path=self.template_path,
-            template_sheet=self.template_sheet,
-            output_path=self.output_path,
-            drawing_input_path=self.drawing_input_path,
-            drawing_rel_input_path=self.drawing_rel_input_path,
-            printer_settings_input_path=self.printer_settings_input_path,
-            sheet_rel_template_path=self.sheet_rel_template_path,
-            logo_input_path=self.logo_input_path,
-            progress_callback=cb
-        )
+        try:
+            run_complete_process(
+                data_input_path=self.data_input_path,
+                data_input_sheet=self.data_input_sheet,
+                batch_number=self.batch_number,
+                template_path=self.template_path,
+                template_sheet=self.template_sheet,
+                output_path=self.output_path,
+                drawing_input_path=self.drawing_input_path,
+                drawing_rel_input_path=self.drawing_rel_input_path,
+                printer_settings_input_path=self.printer_settings_input_path,
+                sheet_rel_template_path=self.sheet_rel_template_path,
+                logo_input_path=self.logo_input_path,
+                progress_callback=cb
+            )
 
-        self.done.emit("Done!")
+            self.done.emit("Done!")
+        except Exception as e:
+            self.err.emit(str(e))

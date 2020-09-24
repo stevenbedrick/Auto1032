@@ -277,6 +277,7 @@ class MainWindow(QWidget):
             )
             self.run_process_thread.done.connect(self.handle_run_process_done)
             self.run_process_thread.status.connect(self.handle_run_process_status)
+            self.run_process_thread.err.connect(self.handle_run_process_err)
             self.go_button.setEnabled(False)
             self.run_process_thread.start()
 
