@@ -101,7 +101,7 @@ class MainWindow(QWidget):
         self.choose_template_layout = QFormLayout()
 
         # we're going to need a pushbutton for choosing the input template:
-        self.choose_input_button = QPushButton("Input DR568...")
+        self.choose_input_button = QPushButton("Input inventory file...")
         self.choose_input_label = QLineEdit()
         self.choose_input_label.setEnabled(False)
         self.choose_template_layout.addRow(self.choose_input_button, self.choose_input_label)
