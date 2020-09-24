@@ -1,7 +1,7 @@
 from typing import Callable
 
 from excel.generate import generate_1032
-from data.loader import load_values_from_dr568
+from data.loader import load_values_from_inventory_file
 from excel.drawing import add_drawings
 from tempfile import mkstemp
 import os
@@ -39,9 +39,9 @@ def run_complete_process(
     # Step 0: Load data from input file
 
 
-    vals = load_values_from_dr568(path_to_spreadsheet=data_input_path,
-                                  from_sheet=data_input_sheet,
-                                  target_batch=batch_number)
+    vals = load_values_from_inventory_file(path_to_spreadsheet=data_input_path,
+                                           from_sheet=data_input_sheet,
+                                           target_batch=batch_number)
 
     if progress_callback:
         progress_callback(1, total_stages)

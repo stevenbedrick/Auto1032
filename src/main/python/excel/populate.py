@@ -10,7 +10,7 @@ from tqdm import tqdm
 
 def populate_worksheet(ws_to_fill: Worksheet, vals: List[Tuple[int, int]], batch_num: int):
     """
-    Actually populate a worksheet with a batch of values from the DR568
+    Actually populate a worksheet with a batch of values from the inventory
 
     Note that this happens in-place to ws_to_fill
     

@@ -21,21 +21,21 @@ def load_sheet_names(path_to_spreadsheet: str) -> List[str]:
     return wb.sheetnames
 
 
-def load_batch_numbers_from_dr568(path_to_spreadsheet: str, from_sheet: str) -> Set[str]:
+def load_batch_numbers_from_inventory_file(path_to_spreadsheet: str, from_sheet: str) -> Set[str]:
     """
-    Rolls through a DR568 spreadsheet, returns unique batch numbers found
+    Rolls through a inventory spreadsheet, returns unique batch numbers found
     :param path_to_spreadsheet:
     :param from_sheet:
     :return:
     """
-    dr568_wb = load_workbook(filename=path_to_spreadsheet)
+    inventory_wb = load_workbook(filename=path_to_spreadsheet)
 
-    if from_sheet not in dr568_wb.sheetnames:
+    if from_sheet not in inventory_wb.sheetnames:
         raise (Exception(f"Spreadsheet does not contain worksheet named {from_sheet}"))
 
-    dr568_sheet = dr568_wb[from_sheet]
+    inventory_sheet = inventory_wb[from_sheet]
 
-    all_j = dr568_sheet[BATCH_NUMBER_COLUMN_NAME]
+    all_j = inventory_sheet[BATCH_NUMBER_COLUMN_NAME]
 
     # get all the batch numbers from this table:
     all_batches = set([c.value for c in all_j[1:] if c.value])
@@ -44,14 +44,14 @@ def load_batch_numbers_from_dr568(path_to_spreadsheet: str, from_sheet: str) -> 
 # a set of e.g. 5 cards, with the envelope number and proxy number
 CardBatch = List[Tuple[int, int]]
 
-def load_values_from_dr568(
+def load_values_from_inventory_file(
         path_to_spreadsheet: str,
         from_sheet: str,
         target_batch: str,
         cards_per_sheet: int = CARDS_PER_WORKSHEET
 ) -> List[CardBatch]:
     """
-    Retrieves the actual card and proxy numbers from the DR568 worksheet
+    Retrieves the actual card and proxy numbers from the inventory worksheet
     :param path_to_spreadsheet:
     :param from_sheet:
     :param target_batch:
@@ -60,14 +60,14 @@ def load_values_from_dr568(
     """
     to_ret = []
 
-    dr568_wb = load_workbook(filename=path_to_spreadsheet)
+    inventory_wb = load_workbook(filename=path_to_spreadsheet)
 
-    if from_sheet not in dr568_wb.sheetnames:
+    if from_sheet not in inventory_wb.sheetnames:
         raise (Exception(f"Spreadsheet does not contain worksheet named {from_sheet}"))
 
-    dr568_sheet = dr568_wb[from_sheet]
+    inventory_sheet = inventory_wb[from_sheet]
 
-    all_j = dr568_sheet[BATCH_NUMBER_COLUMN_NAME]
+    all_j = inventory_sheet[BATCH_NUMBER_COLUMN_NAME]
 
     # figure out which rows have entries for target_batch
     # entries are contiguous, so we just need to find the min and max
@@ -75,7 +75,7 @@ def load_values_from_dr568(
     start_row = None  # these will be 1-indexed, just like Excel does
     stop_row = None
 
-    for idx, r in enumerate(dr568_sheet.iter_rows(min_row=2)):  # skip the header row
+    for idx, r in enumerate(inventory_sheet.iter_rows(min_row=2)):  # skip the header row
         batch_num = r[BATCH_NUMBER_COLUMN_OFFSET].value
         if batch_num == target_batch:
             if start_row is None:  # we must have found the first occurrence
@@ -87,7 +87,7 @@ def load_values_from_dr568(
     if start_row is None or stop_row is None:
         raise (Exception(f"Couldn't find batch {target_batch} in {path_to_spreadsheet}"))
 
-    target_cells = dr568_sheet[f"{CAC_ENV_COL_NAME}{start_row}:{PROXY_NUMBER_COL_NAME}{stop_row}"]
+    target_cells = inventory_sheet[f"{CAC_ENV_COL_NAME}{start_row}:{PROXY_NUMBER_COL_NAME}{stop_row}"]
 
     for idx, chunk in enumerate(grouper(target_cells, cards_per_sheet)):
         # try and validate:

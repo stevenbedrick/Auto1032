@@ -174,7 +174,7 @@ class MainWindow(QWidget):
         self.error_label.setText(e)
 
     def chooseInputClick(self):
-        new_path = self.get_path("Choose input DR568")
+        new_path = self.get_path("Choose inventory workbook...")
         if new_path:
             self.input_data_path = new_path
             self.choose_input_button.setEnabled(False)

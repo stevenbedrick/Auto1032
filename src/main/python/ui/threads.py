@@ -1,7 +1,7 @@
 from PyQt5.QtCore import QThread, pyqtSignal
 from PyQt5.QtWidgets import QWidget, QVBoxLayout, QPushButton, QMessageBox, QFileDialog, QApplication, QFormLayout, \
     QLineEdit, QComboBox, QLabel
-from data.loader import load_batch_numbers_from_dr568, load_sheet_names
+from data.loader import load_batch_numbers_from_inventory_file, load_sheet_names
 from excel.driver import run_complete_process
 
 
@@ -32,7 +32,7 @@ class LoadSheetsAndBatchThread(QThread):
 
             to_ret = {}
             for s in sheet_names:
-                this_sheet_batch = load_batch_numbers_from_dr568(self.path, s)
+                this_sheet_batch = load_batch_numbers_from_inventory_file(self.path, s)
                 to_ret[s] = sorted([str(b) for b in this_sheet_batch])
 
             self.done.emit(to_ret)
