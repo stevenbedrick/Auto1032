@@ -265,7 +265,7 @@ class MainWindow(QWidget):
             self.run_process_thread = Generate1032Thread(
                 data_input_path=self.input_data_path,
                 data_input_sheet=self.sheet_dropdown.currentText(),
-                batch_number=int(self.batch_dropdown.currentText()),
+                batch_number=self.batch_dropdown.currentText(),
                 template_path=self.template_workbook_path,
                 template_sheet=self.chooseTemplateSheetDropdown.currentText(),
                 output_path=filename,
