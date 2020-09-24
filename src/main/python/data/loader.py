@@ -80,7 +80,8 @@ def load_values_from_dr568(
         if batch_num == target_batch:
             if start_row is None:  # we must have found the first occurrence
                 start_row = idx + 2  # add one for the header, and one more to get us into 1-indexed territory
-            else:
+                stop_row = idx + 2 # we could have a batch with only one card in it
+            if idx + 2 >= stop_row:
                 stop_row = idx + 2
 
     if start_row is None or stop_row is None:
@@ -91,17 +92,21 @@ def load_values_from_dr568(
     for idx, chunk in enumerate(grouper(target_cells, cards_per_sheet)):
         # try and validate:
         is_valid = True
-        for card_num, proxy_num in chunk:
-            if card_num.value is None or card_num.value == '':
-                is_valid = False
-            if proxy_num.value is None or proxy_num.value == '':
-                is_valid = False
+        for row in chunk:
+            # We need to check to see that we are not in one of the None-padding entries that grouper will return if
+            # len(target_cells) % cards_per_sheet != 0
+            if row is not None:
+                card_num, proxy_num = row
+                if card_num.value is None or card_num.value == '':
+                    is_valid = False
+                if proxy_num.value is None or proxy_num.value == '':
+                    is_valid = False
 
         if not is_valid:
             raise (Exception(f"Invalid data for chunk {idx} (somewhere around {chunk[0][0].row})"))
 
         # now extract values:
-        actual_values = [(card_num.value, proxy_num.value) for (card_num, proxy_num) in chunk]
+        actual_values = [(x[0].value, x[1].value) for x in chunk if x is not None]
 
         to_ret.append(actual_values)
     return to_ret
