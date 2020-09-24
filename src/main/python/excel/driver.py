@@ -18,7 +18,7 @@ import os
 def run_complete_process(
         data_input_path: str,
         data_input_sheet: str,
-        batch_number: int,
+        batch_number: str,
         template_path: str,
         template_sheet: str,
         output_path: str,
