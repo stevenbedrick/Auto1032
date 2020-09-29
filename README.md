@@ -29,6 +29,14 @@ This program also seems to struggle with very large input inventory files, possi
         - `fbs installer` 
     - _Note_: This has been tested on Mac OS X and Windows 10; note that on Windows 10 I encountered [some issues](https://github.com/mherrmann/fbs/issues/147#issuecomment-698164639) creating an installer executable.
 
+## Project Layout
+
+The important files are all in `src/main/python`; there are three main packages of interest:
+
+- `data`: Routines for extracting data from the inventory data file
+- `excel`: Code to manage the creation of the output file, and to drive the overall process (`excel/driver.py`)
+- `ui`: User interface code 
+
 ## Future Features
 
 This was just meant as a quick weekend project, but if anybody ends up ever wanting to use it more, these might be useful features:
