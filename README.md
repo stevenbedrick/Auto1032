@@ -22,7 +22,7 @@ This program also seems to struggle with very large input inventory files, possi
 
 - This has been tested with Python 3.7
 - Install necessary dependencies: `pip install -r requirements.txt`
-- From there, this project uses the `[fbs](https://build-system.fman.io)` build system to handle packaging (because doing it by hand is a pain and I am lazy). 
+- From there, this project uses the [`fbs`](https://build-system.fman.io) build system to handle packaging (because doing it by hand is a pain and I am lazy). 
     - To run the program, type `fbs run` from the root of the project
     - To cut a release (`.app` on Mac OS X, `.exe` on Windows), run the following commands from the root of the project:
         - `fbs freeze`
