@@ -6,7 +6,7 @@ This repository contains a small Python/QT5 application that automates the tedio
 
 This is a somewhat brittle program, and makes certain assumptions, mostly about the layout of the input card inventory file:
 
-- The input inventory file is sorted by batch
+- The input inventory file is sorted by batch number
 - Batch number is in column `J`
 - Envelope number is in column `C`
 - Proxy number is in column `D`
